@@ -54,10 +54,6 @@ Este projeto oferece uma aplicação web simples e intuitiva para explorar dados
 
 Ao rodar a aplicação, use o menu lateral para escolher o estado e o tipo de informação. O gráfico será atualizado automaticamente!
 
-![Exemplo de gráfico](imagens/exemplo_grafico.png)
-
----
-
 ## 📚 Código Principal
 
 O código principal está no arquivo [`codigoBase.py`](codigoBase.py). Ele utiliza:
