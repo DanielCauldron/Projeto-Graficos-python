@@ -3,7 +3,7 @@
 
 > Compartilhando visualizações interativas dos dados da COVID-19 no Brasil usando Python, Streamlit e Plotly.
 
-![Demonstração da Aplicação](imagens/demo_grafico.png)
+https://projeto-graficos-python-ngdjercdcwe2rkacreqgja.streamlit.app/
 
 ## ✨ Sobre o Projeto
 
@@ -96,4 +96,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 Feito com dedicação por [Daniel Cauldron](https://github.com/DanielCauldron).
 
-https://projeto-graficos-python-ngdjercdcwe2rkacreqgja.streamlit.app/
+
