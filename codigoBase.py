@@ -2,30 +2,36 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-#LENDO O DATASET
+# LENDO O DATASET
 df = pd.read_csv('https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-states.csv')
 
-#MELHORANDO O NOME DAS COLUNAS DA TABELA
-df = df.rename(columns={'newDeaths': 'Novos óbitos','newCases': 'Novos casos','deaths_per_100K_inhabitants': 'óbitos por 100 mil habitantes','totalCases_per_100k_inhabitants':'casos por 100 mil habitantes'})
+# MELHORANDO O NOME DAS COLUNAS
+df = df.rename(columns={
+    'newDeaths': 'Novos óbitos',
+    'newCases': 'Novos casos',
+    'deaths_per_100K_inhabitants': 'Óbitos por 100 mil habitantes',
+    'totalCases_per_100k_inhabitants': 'Casos por 100 mil habitantes'
+})
 
-#SELEÇÃO DO ESTADO
-estados = list(df['state'].unique())
+# SELEÇÃO DO ESTADO
+estados = sorted(df['state'].unique())
 state = st.sidebar.selectbox('Qual estado?', estados)
 
-#SELEÇÃO DA COLUNA
-column = 'Casos por 100mil habitantes'
-colunas = ['Novos óbitos','Novos casos']
+# SELEÇÃO DO TIPO DE DADO
+colunas = ['Novos óbitos', 'Novos casos', 'Óbitos por 100 mil habitantes', 'Casos por 100 mil habitantes']
 column = st.sidebar.selectbox('Qual tipo de informação?', colunas)
 
-#SELEÇÃO DAS LINHAS QUE  PERTENCEM AO ESTADO
-df = df[df['state'] == state]
+# FILTRANDO O DATAFRAME
+df_estado = df[df['state'] == state]
 
-fig =px.line(df, x="date", y=column, title=column + ' - ' + state)
-fig.update_layout( xaxis_title='Data', yaxis_title=column.upper(), title = {'x':0.5})
+# PLOTANDO O GRÁFICO
+fig = px.line(df_estado, x='date', y=column, title=f'{column} - {state}')
+fig.update_layout(xaxis_title='Data', yaxis_title=column.upper(), title={'x': 0.5})
 
-st.title('DADOS COVID - BRASIL')
-st.write('Nessa aplicação,o usuário tem a opção de escolher o estado eo tipo de informação para mostrar o gráfico. Utilize o menu lateral para alterar a montagem.')
+# TÍTULO E DESCRIÇÃO
+st.title('📊 Dados COVID-19 no Brasil')
+st.write('Use o menu lateral para selecionar o estado e o tipo de dado. O gráfico abaixo será atualizado automaticamente.')
 
 st.plotly_chart(fig, use_container_width=True)
 
-st.caption(' Os dados foram obtidos a partir do site : https//github.com/wCota/covide19br')
+st.caption('Fonte dos dados: https://github.com/wcota/covid19br')
